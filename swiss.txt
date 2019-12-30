@@ -1,0 +1,76 @@
+create table branch(
+branch_ifsc varchar(20) primary key,
+branch_name varchar(20) unique,
+branch_address varchar(50),
+branch_phone bigint(10));
+
+create table loan(
+loan_id varchar(20) primary key,
+loan_type varchar(20) unique,
+loan_eligibility varchar(20),
+loan_ROI float(10));
+
+create table accounts(
+account_id varchar(20) primary key,
+account_type varchar(20) unique,
+min_balance int(10) ,
+description varchar(20));
+
+create table admin(
+admin_id int(20) primary key,
+admin_name varchar(20),
+admin_role varchar(20),
+admin_username varchar(20) unique,
+admin_password varchar(20));
+
+create table customer
+(
+customer_id int(20) primary key,
+customer_Ac_No int(20) unique,
+customer_balance bigint(20),
+customer_Name varchar(20),
+customer_dob date,
+customer_email varchar(20) unique,
+customer_phone bigint(10),
+customer_Aadhar bigint(15) unique,
+customer_pan varchar(20) unique,
+customer_username varchar(20) unique,
+customer_password varchar(20),
+customer_loanid varchar(20) references loan(loan_id),
+customer_branch_ifsc varchar(20) references branch(branch_ifsc),
+customer_AC_type varchar(20) references accounts(account_id)
+);
+
+desc customer;
+desc loan;
+desc branch;
+desc admin;
+desc accounts;
+
+insert into accounts values('SB001','savings',500,'individual');
+insert into accounts values('CR001','current',10000,'business');
+
+select * from accounts;
+
+insert into loan values('H001','Home','earnings',10);
+insert into loan values('C002','Car','earnings',12);
+insert into loan values('E003','Education','student',6);
+
+select * from loan;
+
+insert into branch values('SW001','Malleshwaram','Bangalore',2311);
+insert into branch values('SW002','Hebbal','Bangalore',2312);
+insert into branch values('SW003','White field','Bangalore',2313);
+
+select * from branch;
+
+insert into admin values(10,'Shashi','Administrator','shash1','shas1');
+insert into admin values(20,'Abhi','HR','abh12','ab21');
+insert into admin values(30,'Nisha','clerk','nish1','nish31');
+
+select * from admin;
+
+insert into customer values(111,123456,10000,'anusha','1998/02/23','an@gmail.com',9986164530,112233445566,'GIEPS002','anu98','an12','H001','SW001','savings');
+
+select * from customer;
+ 

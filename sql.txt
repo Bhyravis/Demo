@@ -1,0 +1,333 @@
+create table gender(gender_id int primary key, gender_name varchar(8));
+
+
+
+create table person
+(
+id int primary key,
+fname varchar(20),
+lname varchar(8) NOT NULL,
+email varchar(10) unique,
+age int CHECK(age>=18),
+gender int references gender(gender_id),
+city varchar(20) DEFAULT 'Bangalore');
+
+
+insert into gender values(1,'male');
+
+insert into gender values(2,'female');
+
+select * from gender;
+
+
+select * from person;
+
+
+insert into person (id, fname, lname,email,age,gender,city) values (01, 'bhyravi', 'gowda','bg@gmail.com',21, 2, 'bangalore');
+
+select * from person;
+
+
+alter table person modify email varchar(20);
+
+
+insert into person (id, fname, lname,email,age,gender,city) values (02, 'barish', 'gowda','b@gmail.com',21, 1, 'bangalore');
+
+insert into person (id, fname, lname,email,age,gender,city) values (03, 'ravi', 'gowda','t@gmail.com',24, 2, 'bangalore');
+
+insert into person (id, fname, lname,email,age,gender,city) values (04, 'shashi', 'gowda','ag@gmail.com',23, 1, 'mumbai');
+
+insert into person (id, fname, lname,email,age,gender,city) values (05, 'sangeetha', 'gowda','g@gmail.com',29, 2, 'kolkata');
+
+
+select * from person;
+
+
+insert into person (id, fname, lname,email,age,gender,city) values (06, 'chandan', 'holal','c@gmail.com',21, 1, 'hubli');
+
+insert into person (id, fname, lname,email,age,gender,city) values (07, 'vadi', 'raj','v@gmail.com',23, 1, 'tumkur');
+
+select * from person;
+
+
+select fname, lname from person;
+
+
+select fname,lname from person where city='bangalore' and gender=1;
+
+
+select fname,lname from person where city like '%ata';
+
+
+select fname,lname from person where city like 'b%';
+
+
+select fname,lname from person where city like 'b_______e';
+
+
+select fname,lname from person where city like 'bangalore';
+
+
+select fname,lname from person where age between 18 and 22;
+
+
+select distinct(city) from person;
+
+
+select fname,lname from person, gender
+where person.gender=gender.gender_id and gender_name='female';
+
+
+select p.fname,p.lname,g.gender_name from person p, gender g
+where p.gender=g.gender_id and gender_name='male';
+
+
+select fname,lname from person where city in('tumkur','bangalore');
+
+
+select fname,lname from person where city not in('tumkur','bangalore');
+
+
+create table Students(Roll_no number(4),
+firstname varchar(20),lastname varchar(20),age number(2));
+
+insert into students values(3420,'Rohil','Sharma',14);
+insert into students values(3380,'Sachin','Tendulkar',15);
+insert into students values(3410,'Virat','Kohli',16);
+insert into students values(3398,'Rahul','Dravid',14);
+insert into students values(3386,'Mitch','Johnson',15);
+insert into students values(3403,'MS','Dhoni',13);
+insert into students values(3400,'Rickey','Ponting',16);
+
+create table Fee (Roll_no number(4),
+course varchar(20), amount_paid number(5));
+
+select * from fee
+insert into fee values(3380,'Electrical',20000);
+insert into fee values(3420,'ICT',15000);
+insert into fee values(3398,'Commerce',13000);
+insert into fee values(3341,'HR',12000);
+
+
+create table Students(Roll_no int(4),
+firstname varchar(20),lastname varchar(20),age int(2));
+
+
+insert into students values(3420,'Rohil','Sharma',14);
+
+insert into students values(3380,'Sachin','Tendulkar',15);
+
+insert into students values(3410,'Virat','Kohli',16);
+
+insert into students values(3398,'Rahul','Dravid',14);
+
+insert into students values(3386,'Mitch','Johnson',15);
+
+insert into students values(3403,'MS','Dhoni',13);
+
+insert into students values(3400,'Rickey','Ponting',16);
+
+
+
+create table Fee (Roll_no int(4),
+course varchar(20), amount_paid int(5));
+
+
+insert into fee values(3380,'Electrical',20000);
+
+insert into fee values(3420,'ICT',15000);
+
+insert into fee values(3398,'Commerce',13000);
+
+insert into fee values(3341,'HR',12000);
+
+
+desc students;
+
+
+select *from students;
+
+
+
+select firstname, lastname from students where age>13;
+
+select firstname ,lastname from students where firstname like 'R%';
+
+select *from students;
+
+
+select firstname, lastname,age,course from students,Fee 
+where students.age>13 and Fee.course='Electrical';
+
+
+select firstname,amount_paid from students,Fee
+where amount_paid>=15000;
+
+
+select firstname, lastname, course from students,Fee
+where students.Roll_no=fee.Roll_no and course in('ICT','Commerce');
+
+
+select firstname, lastname from Students
+where Students.Roll_no NOT IN (select Roll_no from Fee);
+
+
+select Roll_no from Fee
+where course='HR' and Roll_no NOT IN (select Roll_no from Students);
+
+
+select max(age) from Students;
+
+select min(age) from Students;
+
+select avg(age) from Students;
+
+select count(*) from Students;
+
+select count(*) from Students
+where age>14;
+
+select count(distinct(lastname)) from Students
+where age>14;
+
+
+
+
+select * from actor;
+
+select * from address;
+
+select * from category;
+
+select * from city;
+
+select * from country;
+
+select * from customer;
+
+select * from film;
+
+select * from film_category;
+select * from film_actor;
+
+select title from film,film_actor
+where film.film_id=film_actor.film_id and 
+film_actor.actor_id=(select actor_id from actor where first_name='KARL' and last_name='BERRY');
+
+select title,name from film, category,film_category
+where film.film_id=film_category.film_id and category.category_id=film_category.category_id and name='Animation';
+
+
+select students.Roll_no,students.firstname,students.lastname,fee.amount_paid 
+from students
+INNER JOIN fee
+On students.Roll_no=fee.Roll_no;
+
+select students.Roll_no,students.firstname,students.lastname,fee.amount_paid 
+from students
+Left outer JOIN fee
+On students.Roll_no=fee.Roll_no;
+
+select students.Roll_no,students.firstname,students.lastname,fee.amount_paid 
+from students
+Right outer JOIN fee
+On students.Roll_no=fee.Roll_no;
+
+
+create table branch(
+branch_ifsc varchar(20) primary key,
+branch_name varchar(20) unique,
+branch_address varchar(50),
+branch_phone bigint(10));
+
+create table loan(
+loan_id varchar(20) primary key,
+loan_type varchar(20) unique,
+loan_eligibility varchar(20),
+loan_ROI float(10));
+
+create table accounts(
+account_id varchar(20) primary key,
+account_type varchar(20) unique,
+min_balance int(10) ,
+description varchar(20));
+
+create table admin(
+admin_id int(20) primary key,
+admin_name varchar(20),
+admin_role varchar(20),
+admin_username varchar(20) unique,
+admin_password varchar(20));
+
+create table customer
+(
+customer_id int(20) primary key,
+customer_Ac_No int(20) unique,
+customer_balance bigint(20),
+customer_Name varchar(20),
+customer_dob date,
+customer_email varchar(20) unique,
+customer_phone bigint(10),
+customer_Aadhar bigint(15) unique,
+customer_pan varchar(20) unique,
+customer_username varchar(20) unique,
+customer_password varchar(20),
+customer_loanid varchar(20) references loan(loan_id),
+customer_branch_ifsc varchar(20) references branch(branch_ifsc),
+customer_AC_type varchar(20) references accounts(account_id)
+);
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

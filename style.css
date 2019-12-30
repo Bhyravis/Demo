@@ -1,0 +1,16 @@
+.red{
+	color: red;
+	background: blue;
+	text-align: left;
+}
+
+.thick
+{
+	font-size:20px;
+}
+.green{
+	color:green;
+}
+body {
+  background-color: lightblue;
+}
