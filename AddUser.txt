@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@ page import="java.util.List" %>
+ <%@page import ="org.entity.user" %>
+<c:import url="Include/Header.jsp"><c:param name="title" value="AddUsersform"/></c:import>
+<div class="container mtb"></div>
+	<div class="row">
+	<div class="col-lg-6">
+<form action="<%=request.getContextPath() %>/SiteController" method="post">
+	Username:<input type="text" name="username"></br>
+	Password:<input type="password" name="password"></br>
+	<input type="button" value="AddUser" name="AddUser">                                                
+	</form>
