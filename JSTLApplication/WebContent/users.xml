@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+	<user>
+		<name> Avanalli </name>
+		<gender> Male </gender>
+		<age> 24 </age>
+	</user>
+	<user>
+		<name> Evalilli </name>
+		<gender> Female </gender>
+		<age> 22 </age>
+	</user>
+	<user>
+		<name> Yaravanu </name>
+		<gender> Male </gender>
+		<age> 25 </age>
+	</user>
+	<user>
+		<name> Yaravalu </name>
+		<gender> Female </gender>
+		<age> 23 </age>
+	</user>
+	<user>
+		<name> Avanu </name>
+		<gender> Male </gender>
+		<age> 26 </age>
+	</user>
+	<user>
+		<name> Avalu </name>
+		<gender> Female </gender>
+		<age> 25 </age>
+	</user>
+</users>
